@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NASA Space Explorer</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background:#0b0c2a;
+    color:white;
+    padding:40px;
+}
+
+h1{
+    color:#00d9ff;
+}
+
+#container{
+    width:70%;
+    margin:auto;
+    background:white;
+    color:black;
+    padding:20px;
+    border-radius:10px;
+}
+
+img{
+    width:80%;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:16px;
+    margin-top:20px;
+    background:#007bff;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+#description{
+    margin-top:15px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>🚀 NASA Astronomy Picture</h1>
+
+<div id="container">
+
+<h2 id="title">Loading...</h2>
+
+<p id="date"></p>
+
+<img id="image" src="" alt="NASA Image">
+
+<p id="description"></p>
+
+<button onclick="getNASA()">Load New Space Image</button>
+
+</div>
+
+<script>
+
+// function to fetch data from flask backend
+async function getNASA(){
+
+document.getElementById("title").innerHTML = "Loading...";
+
+try{
+
+const response = await fetch("/api/nasa");
+const data = await response.json();
+
+document.getElementById("title").innerHTML = data.title;
+document.getElementById("date").innerHTML = "Date: " + data.date;
+document.getElementById("image").src = data.url;
+document.getElementById("description").innerHTML = data.explanation;
+
+}
+
+catch(error){
+
+document.getElementById("title").innerHTML = "Error loading data";
+
+}
+
+}
+
+// load automatically
+window.onload = getNASA;
+
+</script>
+
+</body>
+</html>
