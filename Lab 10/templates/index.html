@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grand Élara Hotel — Concierge</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+
+  <div class="page">
+
+    <div class="header">
+      <h1>Grand Élara Hotel</h1>
+      <p>Virtual Concierge — Available 24/7</p>
+    </div>
+
+    <div class="chat-box">
+
+      <div class="quick-buttons">
+        <button onclick="quickSend('What rooms do you have?')">Rooms</button>
+        <button onclick="quickSend('What are the prices?')">Pricing</button>
+        <button onclick="quickSend('What amenities do you have?')">Amenities</button>
+        <button onclick="quickSend('How do I book a room?')">Booking</button>
+        <button onclick="quickSend('What is check-in time?')">Check-in</button>
+        <button onclick="quickSend('Tell me about dining options')">Dining</button>
+        <button onclick="quickSend('Where are you located?')">Location</button>
+        <button onclick="quickSend('What are your policies?')">Policies</button>
+      </div>
+
+      <div class="messages" id="messages">
+        <div class="msg bot">
+          <div class="bubble">
+            Welcome to <b>Grand Élara Hotel</b>! <br/>
+            I am your virtual concierge. Ask me anything about rooms, pricing, amenities, or bookings!
+          </div>
+        </div>
+      </div>
+
+      <div class="input-area">
+        <input type="text" id="userInput" placeholder="Type your question here..." />
+        <button id="sendBtn" onclick="sendMessage()">Send</button>
+      </div>
+
+    </div>
+
+    <p class="footer">© 2025 Grand Élara Hotel · Paris, France</p>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
