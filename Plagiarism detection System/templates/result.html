@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analysis Report — PlagiaScope</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#0b0f17;
+    --card:#111827;
+    --accent:#7c5cff;
+    --good:#22c55e;
+    --warn:#facc15;
+    --bad:#ef4444;
+    --text:#e5e7eb;
+    --muted:#9ca3af;
+}
+
+body{
+    margin:0;
+    font-family:Inter;
+    background:var(--bg);
+    color:var(--text);
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 50px;
+}
+
+.title{
+    font-weight:700;
+}
+
+.score{
+    text-align:center;
+    margin-top:30px;
+}
+
+.circle{
+    width:160px;
+    height:160px;
+    margin:auto;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:32px;
+    font-weight:700;
+    border:8px solid var(--accent);
+    background:linear-gradient(135deg, rgba(124,92,255,0.1), rgba(34,211,238,0.1));
+    box-shadow:0 0 40px rgba(124,92,255,0.2);
+}
+
+.status{
+    margin-top:15px;
+    font-size:16px;
+    font-weight:600;
+    background:linear-gradient(90deg, #22d3ee, #7c5cff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* GRID */
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    padding:40px;
+}
+
+.box{
+    background:linear-gradient(135deg, rgba(17,24,39,0.8), rgba(15,23,42,0.8));
+    padding:25px;
+    border-radius:16px;
+    border:1px solid #1f2937;
+    backdrop-filter:blur(10px);
+    transition:all 0.3s ease;
+}
+
+.box:hover{
+    border-color:rgba(124,92,255,0.3);
+    box-shadow:0 8px 32px rgba(124,92,255,0.1);
+}
+
+.box p{
+    line-height:1.7;
+    font-size:14px;
+}
+
+.box h3{
+    margin-bottom:10px;
+    font-size:14px;
+    color:var(--muted);
+}
+
+.plagiarized{
+    background:rgba(34,211,238,0.3);
+    color:#22d3ee;
+    font-weight:600;
+    padding:2px 4px;
+    border-radius:4px;
+    transition:all 0.2s ease;
+    cursor:pointer;
+}
+
+.plagiarized:hover{
+    background:rgba(34,211,238,0.6);
+    color:#ffffff;
+    text-shadow:0 0 8px rgba(34,211,238,0.8);
+}
+
+/* BUTTON */
+.btn{
+    display:block;
+    text-align:center;
+    margin:40px auto;
+    width:240px;
+    padding:14px 28px;
+    border-radius:12px;
+    background:linear-gradient(90deg, var(--accent), #22d3ee);
+    color:white;
+    text-decoration:none;
+    font-weight:600;
+    transition:all 0.3s ease;
+    box-shadow:0 4px 16px rgba(124,92,255,0.3);
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(124,92,255,0.5);
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="title">PlagiaScope Report</div>
+</div>
+
+<div class="score">
+    <div class="circle">
+        {{ similarity }}%
+    </div>
+    <div class="status">
+        {% if similarity > 70 %}
+        High Similarity Detected
+        {% elif similarity > 40 %}
+        Moderate Similarity
+        {% else %}
+        Content Looks Original
+        {% endif %}
+    </div>
+</div>
+
+<div class="grid">
+
+    <div class="box">
+        <h3>Your Text</h3>
+        <p>{{ highlighted_input | safe }}</p>
+    </div>
+
+    <div class="box">
+        <h3>Matched Source</h3>
+        <p>{{ highlighted_match | safe }}</p>
+    </div>
+
+</div>
+
+<a href="/" class="btn">Run Again</a>
+
+</body>
+</html>
